@@ -1,0 +1,38 @@
+﻿@model List<TestOnlineQuestion.ViewModels.QuestionDTO>
+
+@{
+    ViewBag.Title = "Contest Questions";
+}
+
+<h2>Danh sách câu hỏi</h2>
+
+@using (Html.BeginForm("SubmitContestAnswers", "ManageContest", FormMethod.Post))
+{
+    @Html.Hidden("ContestId", Model.First().Id)
+    for (int i = 0; i < Model.Count; i++)
+    {
+        <h4>@Model[i].QuestionText</h4>
+        <p>
+            <label>
+                @Html.RadioButtonFor(model => Model[i].SelectedAnswer, 0) @Model[i].Answer1
+            </label>
+        </p>
+        <p>
+            <label>
+                @Html.RadioButtonFor(model => Model[i].SelectedAnswer, 1) @Model[i].Answer2
+            </label>
+        </p>
+        <p>
+            <label>
+                @Html.RadioButtonFor(model => Model[i].SelectedAnswer, 2) @Model[i].Answer3
+            </label>
+        </p>
+        <p>
+            <label>
+                @Html.RadioButtonFor(model => Model[i].SelectedAnswer, 3) @Model[i].Answer4
+            </label>
+        </p>
+    }
+
+    <input type="submit" value="Submit" class="btn btn-primary" />
+}

@@ -1,0 +1,46 @@
+﻿@model IEnumerable<TestOnlineQuestion.Models.Question>
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<h2>Danh sách câu hỏi</h2>
+<p>
+    @Html.ActionLink("Tạo câu hỏi mới", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Câu hỏi
+        </th>
+        <th>
+            Chủ đề
+        </th>
+        <th>
+            Độ khó
+        </th>
+        <th>
+            Đáp án đúng
+        </th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.QuestionText)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Topic.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DifficultyLevel)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CorrectAnswer)
+            </td>
+            <td>
+                @Html.ActionLink("Chỉnh sửa", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Xóa", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+</table>

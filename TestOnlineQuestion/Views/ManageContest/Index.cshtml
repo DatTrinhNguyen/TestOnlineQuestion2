@@ -1,0 +1,48 @@
+﻿@model IEnumerable<TestOnlineQuestion.Models.Contest>
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<h2>Danh sách cuộc thi</h2>
+<p>
+    @Html.ActionLink("Tạo cuộc thi mới", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Tên cuộc thi
+        </th>
+        <th>
+            Tên chủ đề
+        </th>
+        <th>
+            Độ khó
+        </th>
+        <th>
+            Số câu hỏi
+        </th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Topic.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DifficultyLevel)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.QuestionCount)
+            </td>
+            <td>
+                @Html.ActionLink("Chỉnh sửa", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Xóa", "Delete", new { id = item.Id }) |
+                @Html.ActionLink("Quản lý câu hỏi", "ManageContestQuestions", new { id = item.Id })
+            </td>
+        </tr>
+    }
+</table>

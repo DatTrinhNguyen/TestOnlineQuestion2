@@ -1,0 +1,45 @@
+﻿@model TestOnlineQuestion.Models.Contest
+
+
+<h2>Xóa cuộc thi</h2>
+
+<h3>Bạn có chắc chắn muốn xóa cuộc thi này</h3>
+<div>
+    <h4>Contest</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Tên cuộc thi
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt>
+            Tên chủ đề
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Topic.Name)
+        </dd>
+        <dt>
+            Độ khó
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DifficultyLevel)
+        </dd>
+        <dt>
+            Số câu hỏi
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.QuestionCount)
+        </dd>
+    </dl>
+
+    @using (Html.BeginForm("Delete", "ManageContest", new { id = Model.Id }, FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-actions no-color">
+            <input type="submit" value="Xóa" class="btn btn-danger" /> |
+            @Html.ActionLink("Trở về trang trước", "Index")
+        </div>
+    }
+</div>

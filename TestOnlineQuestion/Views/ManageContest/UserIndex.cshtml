@@ -1,0 +1,50 @@
+﻿@model IEnumerable<TestOnlineQuestion.Models.Contest>
+@{
+    Layout = "~/Views/Shared/_DefaultLayout.cshtml";
+}
+<h2>Danh sách cuộc thi</h2>
+<div class="form-group">
+    @using (Html.BeginForm("UserIndex", "ManageContest", FormMethod.Get))
+    {
+        @Html.Label("selectedTopicId", "Chọn chủ đề")
+        @Html.DropDownList("selectedTopicId", ViewBag.TopicList as SelectList, "Tất cả", new { @class = "form-control" })
+        <input type="submit" value="Lọc" class="btn btn-primary" />
+    }
+</div>
+<table class="table">
+    <tr>
+        <th>
+            Tên cuộc thi
+        </th>
+        <th>
+            Tên chủ đề
+        </th>
+        <th>
+            Độ khó
+        </th>
+        <th>
+            Số câu hỏi
+        </th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Topic.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DifficultyLevel)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.QuestionCount)
+            </td>
+            <td>
+                @Html.ActionLink("Tham gia cuộc thi", "ContestQuestions", new { id = item.Id })
+            </td>
+        </tr>
+    }
+</table>

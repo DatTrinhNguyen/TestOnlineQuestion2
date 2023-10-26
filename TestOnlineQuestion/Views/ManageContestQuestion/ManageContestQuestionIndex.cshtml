@@ -1,0 +1,42 @@
+﻿@model TestOnlineQuestion.Models.Contest
+
+<h2>Chi tiết cuộc thi: @Model.Name</h2>
+<p>
+    @Html.ActionLink("Trở về cuộc thi", "Index")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Tên chủ đề
+        </th>
+        <th>
+            Độ khó
+        </th>
+        <th>
+            Số câu hỏi
+        </th>
+        <th>
+            @Html.DisplayName("Remaining Questions")
+        </th>
+    </tr>
+    <tr>
+        <td>
+            @Html.DisplayFor(model => model.Topic.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.DifficultyLevel)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.QuestionCount)
+        </td>
+        <td>
+            @ViewBag.RemainingQuestions
+        </td>
+    </tr>
+</table>
+<p>
+    @if (ViewBag.RemainingQuestions > 0)
+    {
+        @Html.ActionLink("Thêm câu hỏi", "AddQuestion", new { contestId = ViewBag.ContestId })
+    }
+</p>

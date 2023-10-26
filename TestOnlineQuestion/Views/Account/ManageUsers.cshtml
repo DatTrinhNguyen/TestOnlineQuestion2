@@ -1,0 +1,42 @@
+﻿@model List<TestOnlineQuestion.Models.User>
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<h2>Quản lý người dùng</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Tên tài khoản</th>
+            <th>Họ đệm</th>
+            <th>Tên</th>
+            <th>Email</th>
+            <th>Trạng thái</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.Id</td>
+                <td>@user.HoDem</td>
+                <td>@user.Ten</td>
+                <td>@user.Email</td>
+                <td>@(user.State == true ? "Kích hoạt" : "Vô hiệu hóa")</td>
+                <td>
+                    @if (user.State == true)
+                    {
+                        <a href="@Url.Action("ToggleUserState", new { userId = user.Id })">Vô hiệu hóa</a>
+                    }
+                    else
+                    {
+                        <a href="@Url.Action("ToggleUserState", new { userId = user.Id })">Kích hoạt</a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+

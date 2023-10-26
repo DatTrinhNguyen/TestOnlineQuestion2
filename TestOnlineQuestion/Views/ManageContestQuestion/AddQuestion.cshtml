@@ -1,0 +1,25 @@
+﻿@model List<TestOnlineQuestion.Models.Question>
+
+<h2>Add Questions to Contest: @ViewBag.ContestName</h2>
+<p>
+    @Html.ActionLink("Trở về chi tiết cuộc thi", "Index", new { id = ViewBag.ContestId })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @*@Html.DisplayNameFor(model => model.QuestionText)*@
+        </th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.QuestionText)
+            </td>
+            <td>
+                @Html.ActionLink("Thêm câu hỏi", "AddQuestion", new { contestId = ViewBag.ContestId, questionId = item.Id })
+            </td>
+        </tr>
+    }
+</table>

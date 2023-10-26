@@ -1,0 +1,53 @@
+﻿@model IEnumerable<TestOnlineQuestion.Models.Question>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- No script here -->
+</head>
+<body>
+    <!-- HTML content -->
+    @using (Html.BeginForm("AddQuestionsToContest", "ManageContest", FormMethod.Post))
+    {
+        <input type="hidden" name="ContestId" value="@ViewBag.ContestId" />
+        <h2>Chọn câu hỏi cho cuộc thi</h2>
+        <p>Số lượng cần thêm: <span id="remainingQuestions">@ViewBag.QuestionCount</span></p>
+        <table class="table">
+            <tr>
+                <th>Câu hỏi</th>
+                <th>Lựa chọn</th>
+            </tr>
+            @for (int i = 0; i < Model.Count(); i++)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => Model.ElementAt(i).QuestionText)</td>
+                    <td>
+                        <input type="checkbox" class="question-checkbox" name="selectedQuestions" value="@Model.ElementAt(i).Id" data-question-id="@Model.ElementAt(i).Id" />
+                    </td>
+                </tr>
+            }
+        </table>
+        <input type="submit" value="Thêm câu hỏi vào cuộc thi" id="submitButton" disabled />
+    }
+
+    <!-- Script at the end of body -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $(".question-checkbox").change(function() {
+                var checkedQuestions = $(".question-checkbox:checked");
+                var selectedQuestionIds = checkedQuestions.map(function() {
+                    return $(this).data("question-id");
+                }).get();
+                var remaining = @ViewBag.QuestionCount - selectedQuestionIds.length;
+                $("#remainingQuestions").text(remaining);
+                if (remaining === 0) {
+                    $("#submitButton").prop("disabled", false);
+                } else {
+                    $("#submitButton").prop("disabled", true);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

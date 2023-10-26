@@ -1,0 +1,32 @@
+﻿@model TestOnlineQuestion.Models.User
+@{
+    ViewBag.Title = "AccountInfoAdmin";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Thông Tin Tài Khoản</h2>
+@using (Html.BeginForm("UpdateAccount", "Account", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.HoDem, "Họ và Đệm:")
+        @Html.TextBoxFor(model => model.HoDem, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Ten, "Tên:")
+        @Html.TextBoxFor(model => model.Ten, new { @class = "form-control" })
+    </div>
+
+    <div class "form-group">
+        @Html.LabelFor(model => model.Email, "Địa chỉ Email:")
+        @Html.TextBoxFor(model => model.Email, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Password, "Mật khẩu:")
+        @Html.PasswordFor(model => model.Password, new { @class = "form-control" })
+    </div>
+    <button type="submit" class="btn btn-primary">Cập nhật thông tin</button>
+}
